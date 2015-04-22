@@ -6,4 +6,14 @@ public class Anonyme extends Utilisateur {
 	public Anonyme() {
 	}
 
+	@Override
+	public boolean checkPass(String pass) {
+		return false;
+	}
+
+	@Override
+	public String pseudo() {
+		return "guest" + id;
+	}
+
 }
