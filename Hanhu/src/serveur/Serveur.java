@@ -1,10 +1,17 @@
+package serveur;
+import java.io.Serializable;
+import java.rmi.Remote;
 import java.util.Set;
 
 import utilisateur.*;
 
 
-public class Serveur {
+public class Serveur implements Remote, Serializable {
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 5412991223900807232L;
 	private Set<Stockage> stockages;
 	private Set<Utilisateur> utilisateurs;
 	
