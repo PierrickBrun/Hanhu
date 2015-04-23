@@ -1,6 +1,8 @@
 package utilisateur;
 
-public abstract class Utilisateur implements _Utilisateur {
+import java.io.Serializable;
+
+public interface _Utilisateur extends Serializable {
 
 	public abstract boolean checkPass(String pass);
 

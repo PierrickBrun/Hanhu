@@ -1,4 +1,4 @@
-package echange;
+package action.echange;
 
 public class Diffusion {
 
