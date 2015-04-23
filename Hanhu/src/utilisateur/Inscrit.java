@@ -1,11 +1,11 @@
 package utilisateur;
 
-public class Enregistré extends Utilisateur{
+public class Inscrit extends Utilisateur{
 	
 	private String pseudo;
 	private String pass;
 	
-	public Enregistré(String pseudo, String pass){
+	public Inscrit(String pseudo, String pass){
 		this.pseudo = pseudo;
 		this.pass = pass;
 	}
