@@ -1,5 +1,7 @@
 package echange;
 
+import action.Reception;
+
 public class Asynchrone implements Reception {
 
 	@Override

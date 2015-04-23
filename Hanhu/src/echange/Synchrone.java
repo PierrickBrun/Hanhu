@@ -1,5 +1,7 @@
 package echange;
 
+import action.Reception;
+
 public class Synchrone implements Reception {
 
 	@Override
