@@ -12,7 +12,7 @@ public interface _Serveur extends Remote {
 	 * 
 	 * @return utilisateur créé
 	 */
-	public Utilisateur connexion() throws RemoteException;
+	public _Utilisateur connexion() throws RemoteException;
 
 	/**
 	 * connecte un utilisateur enregistré
@@ -21,6 +21,10 @@ public interface _Serveur extends Remote {
 	 * @param pass
 	 * @return
 	 */
-	public Utilisateur connexion(String pseudo, String pass) throws RemoteException;
+	public _Utilisateur connexion(String pseudo, String pass)
+			throws RemoteException;
+
+	public _Utilisateur nouvelUtilisateur(String pseudo, String pass)
+			throws RemoteException;
 
 }

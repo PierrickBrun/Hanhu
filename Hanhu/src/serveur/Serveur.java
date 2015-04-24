@@ -6,11 +6,14 @@ import java.util.Set;
 
 import utilisateur.*;
 
-@SuppressWarnings("serial")
 public class Serveur extends UnicastRemoteObject implements _Serveur {
+
+	private static final long serialVersionUID = -6046874410587068537L;
+	private int nbUtilisateur;
 
 	protected Serveur() throws RemoteException {
 		super();
+		nbUtilisateur = 0;
 	}
 
 	// private Set<Stockage> stockages;
@@ -20,10 +23,11 @@ public class Serveur extends UnicastRemoteObject implements _Serveur {
 	 * connecte un utilisateur anonymement, créé à la volée
 	 * 
 	 * @return utilisateur créé
+	 * @throws RemoteException
 	 */
-	public Utilisateur connexion() {
-		System.out.println("OKLM");
-		Anonyme anonyme = new Anonyme();
+	public Utilisateur connexion() throws RemoteException {
+		Anonyme anonyme = new Anonyme(nbUtilisateur);
+		nbUtilisateur++;
 		return anonyme;
 	}
 
@@ -43,6 +47,12 @@ public class Serveur extends UnicastRemoteObject implements _Serveur {
 			}
 		}
 		return null;
+	}
+
+	@Override
+	public _Utilisateur nouvelUtilisateur(String pseudo, String pass)
+			throws RemoteException {
+		return new Inscrit(pseudo, pass);
 	}
 
 }

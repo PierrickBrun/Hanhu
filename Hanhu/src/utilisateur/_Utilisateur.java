@@ -1,11 +1,12 @@
 package utilisateur;
 
-import java.io.Serializable;
+import java.rmi.Remote;
+import java.rmi.RemoteException;
 
-public interface _Utilisateur extends Serializable {
+public interface _Utilisateur extends Remote {
 
-	public abstract boolean checkPass(String pass);
+	public boolean checkPass(String pass) throws RemoteException;
 
-	public abstract String pseudo();
+	public String pseudo() throws RemoteException;
 
 }
