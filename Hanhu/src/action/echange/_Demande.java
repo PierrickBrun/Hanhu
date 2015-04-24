@@ -1,6 +1,6 @@
 package action.echange;
 
-public interface Demande extends Transmission {
+public interface _Demande extends _Transmission {
 	
 	/**
 	 * 

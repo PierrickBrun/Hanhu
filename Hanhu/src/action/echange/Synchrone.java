@@ -1,8 +1,8 @@
 package action.echange;
 
-import action.Reception;
+import action._Reception;
 
-public class Synchrone implements Reception {
+public class Synchrone implements _Reception {
 
 	@Override
 	public boolean executer() {

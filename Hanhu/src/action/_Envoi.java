@@ -1,7 +1,7 @@
 package action;
 
 
-public interface Envoi extends Action {
+public interface _Envoi extends _Action {
 	
 	/**
 	 * 
