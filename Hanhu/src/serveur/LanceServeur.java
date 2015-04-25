@@ -17,10 +17,9 @@ public class LanceServeur {
 			LocateRegistry.createRegistry(1099);
 			_Serveur serveur = new Serveur();
 
-			String url = "rmi://" + InetAddress.getLocalHost().getHostAddress()
-					+ "/serveur";
+			String url = "rmi://" + InetAddress.getLocalHost().getHostAddress();
 			System.out.println("Enregistrement de l'objet avec l'url : " + url);
-			Naming.rebind(url, serveur);
+			Naming.rebind(url + "/serveur", serveur);
 			System.out.println("serveur lancé");
 
 		} catch (Exception e) {

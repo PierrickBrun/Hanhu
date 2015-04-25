@@ -1,11 +1,20 @@
 package action.echange;
 
-public class Discussion extends Synchrone implements _Transmission{
+import utilisateur._Utilisateur;
+
+public class Discussion extends Synchrone implements _Transmission {
 
 	@Override
-	public boolean executer(Object objet) {
-		
-		return false;
+	public void envoyer(Object objet, _Utilisateur expediteur) {
+		// TODO Auto-generated method stub
+
+	}
+
+	@Override
+	public Object recevoir() {
+		return null;
+		// TODO Auto-generated method stub
+
 	}
 
 }

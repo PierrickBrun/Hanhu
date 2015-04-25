@@ -2,7 +2,10 @@ package serveur;
 
 import java.rmi.Remote;
 import java.rmi.RemoteException;
+import java.util.Collection;
 
+import action.echange.*;
+import message.*;
 import utilisateur.*;
 
 public interface _Serveur extends Remote {
@@ -24,7 +27,16 @@ public interface _Serveur extends Remote {
 	public _Utilisateur connexion(String pseudo, String pass)
 			throws RemoteException;
 
-	public _Utilisateur nouvelUtilisateur(String pseudo, String pass)
+	public _Utilisateur nouvUtilisateur(String pseudo, String pass)
 			throws RemoteException;
+
+	public _Diffusion nouvDiffusion() throws RemoteException;
+
+	public void addDiffusion(_Message message) throws RemoteException;
+
+	public Collection<_Message> getList(String name, _Utilisateur expediteur)
+			throws RemoteException;
+
+	public _Asynchrone nouvAsynchrone() throws RemoteException;
 
 }

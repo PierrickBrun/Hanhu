@@ -1,12 +1,12 @@
 package action;
 
+import java.rmi.Remote;
+import java.rmi.RemoteException;
 
-public interface _Envoi extends _Action {
-	
-	/**
-	 * 
-	 * @param objet
-	 */
-	public boolean executer(Object objet);
+import utilisateur._Utilisateur;
 
+public interface _Envoi extends Remote {
+
+	public void envoyer(Object objet, _Utilisateur expediteur)
+			throws RemoteException;
 }

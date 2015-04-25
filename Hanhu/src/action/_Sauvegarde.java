@@ -1,5 +1,7 @@
 package action;
 
-public interface _Sauvegarde extends _Action {
+public interface _Sauvegarde {
+
+	public void executer();
 
 }
