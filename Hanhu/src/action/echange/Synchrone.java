@@ -1,11 +1,11 @@
 package action.echange;
 
-import action._Reception;
+import java.rmi.RemoteException;
 
-public class Synchrone implements _Reception {
+public class Synchrone implements _Synchrone {
 
 	@Override
-	public Object recevoir() {
+	public Object recevoir() throws RemoteException {
 		return null;
 		// TODO Auto-generated method stub
 

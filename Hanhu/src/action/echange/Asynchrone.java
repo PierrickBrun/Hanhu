@@ -3,8 +3,8 @@ package action.echange;
 import java.rmi.RemoteException;
 import java.rmi.server.UnicastRemoteObject;
 
+import message._Message;
 import serveur._Serveur;
-import utilisateur._Utilisateur;
 
 public class Asynchrone extends UnicastRemoteObject implements _Asynchrone {
 
@@ -23,9 +23,9 @@ public class Asynchrone extends UnicastRemoteObject implements _Asynchrone {
 	}
 
 	@Override
-	public void envoyer(Object objet, _Utilisateur expediteur)
-			throws RemoteException {
-		reponse = serveur.getList((String) objet, expediteur);
+	public void envoyer(_Message message) throws RemoteException {
+		reponse = serveur.getList((String) message.objet(),
+				message.expediteur());
 	}
 
 }

@@ -5,7 +5,6 @@ import java.rmi.server.UnicastRemoteObject;
 
 import message.*;
 import serveur.*;
-import utilisateur._Utilisateur;
 
 public class Diffusion extends UnicastRemoteObject implements _Diffusion {
 
@@ -16,9 +15,7 @@ public class Diffusion extends UnicastRemoteObject implements _Diffusion {
 		this.serveur = serveur;
 	}
 
-	public void envoyer(Object objet, _Utilisateur expediteur)
-			throws RemoteException {
-		Message message = new Message(expediteur, objet);
+	public void envoyer(_Message message) throws RemoteException {
 		serveur.addDiffusion(message);
 	}
 

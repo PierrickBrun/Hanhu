@@ -1,6 +1,5 @@
 package serveur;
 
-import java.net.InetAddress;
 import java.rmi.Naming;
 import java.rmi.registry.LocateRegistry;
 
@@ -9,18 +8,22 @@ public class LanceServeur {
 	public static void main(String[] args) {
 
 		/*
-		 * à changer selon machine System.setProperty("java.security.policy",
-		 * "D:\\Users\\Pierrick_2\\gitHanhu\\Hanhu\\ma_policy_serveur");
+		 * System.setProperty("java.security.policy",
+		 * "D:\\Users\\Pierrick_2\\gitHanhu\\Hanhu\\server.policy");
 		 */
 
 		try {
+			/*
+			 * if (System.getSecurityManager() == null) {
+			 * System.setSecurityManager(new SecurityManager()); }
+			 */
 			LocateRegistry.createRegistry(1099);
 			_Serveur serveur = new Serveur();
 
-			String url = "rmi://" + InetAddress.getLocalHost().getHostAddress();
+			String url = "rmi://" + "152.77.82.242";
 			System.out.println("Enregistrement de l'objet avec l'url : " + url);
 			Naming.rebind(url + "/serveur", serveur);
-			System.out.println("serveur lancé");
+			System.out.println("serveur lancÃ©");
 
 		} catch (Exception e) {
 			// TODO Auto-generated catch block

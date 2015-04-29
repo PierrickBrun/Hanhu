@@ -15,4 +15,5 @@ public interface _Message extends Remote {
 	public _Utilisateur expediteur() throws RemoteException;
 
 	public Object objet() throws RemoteException;
+
 }

@@ -3,10 +3,9 @@ package action;
 import java.rmi.Remote;
 import java.rmi.RemoteException;
 
-import utilisateur._Utilisateur;
+import message._Message;
 
 public interface _Envoi extends Remote {
 
-	public void envoyer(Object objet, _Utilisateur expediteur)
-			throws RemoteException;
+	public void envoyer(_Message message) throws RemoteException;
 }
