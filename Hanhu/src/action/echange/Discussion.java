@@ -16,30 +16,37 @@ public class Discussion extends UnicastRemoteObject implements _Discussion {
 	private LinkedList<_Message> messages = new LinkedList<_Message>();
 
 	/**
-	 * Constructeur de la discussion 
+	 * Constructeur de la discussion
+	 * 
 	 * @param users
 	 * @throws RemoteException
 	 */
-	public Discussion(Set<_Utilisateur> users) throws RemoteException {this.utilisateurs = users;}
-	
-	/**
-	 * Constructeur vide de la discussion
-	 * @throws RemoteException
-	 */
-	public Discussion() throws RemoteException {}
+	public Discussion(Set<_Utilisateur> users) throws RemoteException {
+		this.utilisateurs = users;
+	}
 
 	@Override
-	public Set<_Utilisateur> utilisateurs() {return utilisateurs;}
+	public Set<_Utilisateur> utilisateurs() {
+		return utilisateurs;
+	}
 
 	@Override
-	public void addUtilisateur(_Utilisateur utilisateur) {utilisateurs.add(utilisateur);}
+	public void addUtilisateur(_Utilisateur utilisateur) {
+		utilisateurs.add(utilisateur);
+	}
 
 	@Override
-	public void delUtilisateur(_Utilisateur utilisateur) {utilisateurs.remove(utilisateur);}
+	public void delUtilisateur(_Utilisateur utilisateur) {
+		utilisateurs.remove(utilisateur);
+	}
 
 	@Override
-	public void envoyer(_Message message) throws RemoteException {messages.add(message);}
+	public void envoyer(_Message message) throws RemoteException {
+		messages.add(message);
+	}
 
 	@Override
-	public Object recevoir() throws RemoteException {return messages;}
+	public Object recevoir() throws RemoteException {
+		return messages;
+	}
 }

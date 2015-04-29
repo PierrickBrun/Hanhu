@@ -26,66 +26,63 @@ public interface _Serveur extends Remote {
 	 * @param pass
 	 * @return
 	 */
-	public _Utilisateur connexion(String pseudo, String pass, _Client client) throws RemoteException;
+	public _Utilisateur connexion(String pseudo, String pass, _Client client)
+			throws RemoteException;
 
 	/**
 	 * Cree un nouvel utilisateur
+	 * 
 	 * @param pseudo
 	 * @param pass
 	 * @return un utilisateur
 	 * @throws RemoteException
 	 */
-	public _Utilisateur nouvUtilisateur(String pseudo, String pass) throws RemoteException;
+	public _Utilisateur nouvUtilisateur(String pseudo, String pass)
+			throws RemoteException;
 
 	/**
-	 * Cree une nouvelle discussion
-	 * @return une discussion
-	 * @throws RemoteException
-	 */
-	public _Diffusion nouvDiffusion() throws RemoteException;
-	
-	/**
-	 * Modifie la liste des utilisateurs de la discussion
+	 * Renvoie une discussion déjà existante ou cree a la volee
+	 * 
 	 * @param utilisateurs
-	 * @return discussion 
+	 * @return discussion
 	 * @throws RemoteException
 	 */
-	public _Discussion discussion(Set<_Utilisateur> utilisateurs) throws RemoteException;
+	public _Discussion discussion(Set<_Utilisateur> utilisateurs)
+			throws RemoteException;
 
 	/**
 	 * Cree un nouveau message
+	 * 
 	 * @param objet
 	 * @param expediteur
 	 * @return message
 	 * @throws RemoteException
 	 */
-	public _Message nouvMessage(Object objet, _Utilisateur expediteur) throws RemoteException;
-
-	/**
-	 * Ajout un message Ã  la diffusion
-	 * @param message
-	 * @throws RemoteException
-	 */
-	public void addDiffusion(_Message message) throws RemoteException;
+	public _Message nouvMessage(Object objet, _Utilisateur expediteur)
+			throws RemoteException;
 
 	/**
 	 * Renvoie la diffusion
+	 * 
 	 * @param name
 	 * @param expediteur
 	 * @return
 	 * @throws RemoteException
 	 */
-	public Collection<_Message> getList(String name, _Utilisateur expediteur) throws RemoteException;
+	public Collection<_Message> getList(String name, _Utilisateur expediteur)
+			throws RemoteException;
 
 	/**
 	 * Cree une reception asynchrone
+	 * 
 	 * @return la reception
 	 * @throws RemoteException
 	 */
 	public _Asynchrone nouvAsynchrone() throws RemoteException;
 
 	/**
-	 * Envoi un fichier 
+	 * Envoi un fichier
+	 * 
 	 * @param adresse
 	 * @throws RemoteException
 	 */
@@ -93,6 +90,7 @@ public interface _Serveur extends Remote {
 
 	/**
 	 * Reception d'un fichier
+	 * 
 	 * @param nom
 	 * @param adresse
 	 * @throws RemoteException
@@ -101,6 +99,7 @@ public interface _Serveur extends Remote {
 
 	/**
 	 * Renvoie l'utilisateur suivant le pseudo passe en parametre
+	 * 
 	 * @param name
 	 * @return utilisateur
 	 * @throws RemoteException
@@ -108,10 +107,23 @@ public interface _Serveur extends Remote {
 	public _Utilisateur getUtilisateur(String name) throws RemoteException;
 
 	/**
-	 * Cree un nouveau Client 
+	 * Cree un nouveau Client
+	 * 
 	 * @return client
 	 * @throws RemoteException
 	 */
 	public _Client nouvClient() throws RemoteException;
+
+	/**
+	 * Renvoie une diffusion déjà existante ou cree a la volee
+	 * 
+	 * @param utilisateurs
+	 * @return
+	 * @throws RemoteException
+	 */
+	public _Diffusion diffusion(Set<_Utilisateur> utilisateurs)
+			throws RemoteException;
+
+	public Set<_Utilisateur> utilisateurs() throws RemoteException;
 
 }

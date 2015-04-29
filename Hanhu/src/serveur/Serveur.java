@@ -8,9 +8,7 @@ import java.nio.channels.FileChannel;
 import java.rmi.RemoteException;
 import java.rmi.server.UnicastRemoteObject;
 import java.util.Collection;
-import java.util.Date;
 import java.util.HashSet;
-import java.util.LinkedList;
 import java.util.Set;
 
 import client.Client;
@@ -24,22 +22,26 @@ public class Serveur extends UnicastRemoteObject implements _Serveur {
 	private static final long serialVersionUID = -6046874410587068537L;
 
 	public Set<_Discussion> discussions = new HashSet<_Discussion>();
-	public LinkedList<_Message> diffusions = new LinkedList<_Message>();
+	public Set<_Diffusion> diffusions = new HashSet<_Diffusion>();
 	private Set<_Utilisateur> utilisateurs = new HashSet<_Utilisateur>();
 
 	/**
 	 * Constructeur serveur
+	 * 
 	 * @throws RemoteException
 	 */
 	public Serveur() throws RemoteException {
 		super();
 	}
-	
+
 	/**
 	 * Ajoute un utilisateur à la liste des utilisateurs
+	 * 
 	 * @param utilisateur
 	 */
-	private void addUser(Utilisateur utilisateur) {utilisateurs.add(utilisateur);}
+	private void addUser(Utilisateur utilisateur) {
+		utilisateurs.add(utilisateur);
+	}
 
 	@Override
 	public _Utilisateur getUtilisateur(String name) throws RemoteException {
@@ -50,13 +52,7 @@ public class Serveur extends UnicastRemoteObject implements _Serveur {
 		}
 		return null;
 	}
-	
-	@Override
-	public void addDiffusion(_Message message) throws RemoteException {
-		message.setDate(new Date());
-		diffusions.add(message);
-	}
-	
+
 	@SuppressWarnings("unchecked")
 	@Override
 	public Collection<_Message> getList(String name, _Utilisateur utilisateur) {
@@ -72,19 +68,21 @@ public class Serveur extends UnicastRemoteObject implements _Serveur {
 		}
 		return coll;
 	}
-	
+
 	/**
 	 * Diffusion et affichage du message à tout les utilisateurs de la liste
+	 * 
 	 * @param message
 	 * @param destinataires
 	 * @throws RemoteException
 	 */
-	public void diffuser(_Message message, Set<Utilisateur> destinataires) throws RemoteException {
+	public void diffuser(_Message message, Set<Utilisateur> destinataires)
+			throws RemoteException {
 		for (_Utilisateur user : destinataires) {
 			user.afficher(message.toString());
 		}
 	}
-	
+
 	@Override
 	public Utilisateur connexion(_Client client) throws RemoteException {
 		Anonyme anonyme = new Anonyme(utilisateurs.size());
@@ -92,9 +90,10 @@ public class Serveur extends UnicastRemoteObject implements _Serveur {
 		anonyme.setClient(client);
 		return anonyme;
 	}
-	
+
 	@Override
-	public _Utilisateur connexion(String pseudo, String pass, _Client client) throws RemoteException {
+	public _Utilisateur connexion(String pseudo, String pass, _Client client)
+			throws RemoteException {
 		for (_Utilisateur utilisateur : utilisateurs) {
 			if (utilisateur.pseudo().equals(pseudo)) {
 				if (utilisateur.checkPass(pass)) {
@@ -107,7 +106,13 @@ public class Serveur extends UnicastRemoteObject implements _Serveur {
 	}
 
 	@Override
-	public _Utilisateur nouvUtilisateur(String pseudo, String pass) throws RemoteException {
+	public _Utilisateur nouvUtilisateur(String pseudo, String pass)
+			throws RemoteException {
+		for (_Utilisateur utilisateur : utilisateurs) {
+			if (utilisateur.pseudo().equals(pseudo)) {
+				return null;
+			}
+		}
 		Inscrit inscrit = new Inscrit(pseudo, pass);
 		addUser(inscrit);
 		return inscrit;
@@ -120,8 +125,27 @@ public class Serveur extends UnicastRemoteObject implements _Serveur {
 	}
 
 	@Override
-	public _Diffusion nouvDiffusion() throws RemoteException {
-		return new Diffusion(this);
+	public _Diffusion diffusion(Set<_Utilisateur> utilisateurs)
+			throws RemoteException {
+		for (_Diffusion diffusion : diffusions) {
+			for (_Utilisateur userDiscu : diffusion.utilisateurs()) {
+				boolean contains = false;
+				for (_Utilisateur user : utilisateurs) {
+					if (user.pseudo().equals(userDiscu.pseudo())) {
+						contains = true;
+					}
+				}
+				if (contains == false) {
+					_Diffusion ajout = new Diffusion(utilisateurs);
+					this.diffusions.add(ajout);
+					return ajout;
+				}
+			}
+			return diffusion;
+		}
+		_Diffusion ajout = new Diffusion(utilisateurs);
+		this.diffusions.add(ajout);
+		return ajout;
 	}
 
 	@Override
@@ -130,7 +154,8 @@ public class Serveur extends UnicastRemoteObject implements _Serveur {
 	}
 
 	@Override
-	public _Discussion discussion(Set<_Utilisateur> utilisateurs) throws RemoteException {
+	public _Discussion discussion(Set<_Utilisateur> utilisateurs)
+			throws RemoteException {
 		for (_Discussion discussion : discussions) {
 			for (_Utilisateur userDiscu : discussion.utilisateurs()) {
 				boolean contains = false;
@@ -140,20 +165,21 @@ public class Serveur extends UnicastRemoteObject implements _Serveur {
 					}
 				}
 				if (contains == false) {
-					_Discussion ajout = new Discussion();
+					_Discussion ajout = new Discussion(utilisateurs);
 					this.discussions.add(ajout);
 					return ajout;
 				}
 			}
 			return discussion;
 		}
-		_Discussion ajout = new Discussion();
+		_Discussion ajout = new Discussion(utilisateurs);
 		this.discussions.add(ajout);
 		return ajout;
 	}
 
 	@Override
-	public void uploadFile(String fichier, String adresse) throws RemoteException {
+	public void uploadFile(String fichier, String adresse)
+			throws RemoteException {
 		FileChannel fichierEntree = null;
 		FileChannel FichierSortie = null;
 		try {
@@ -219,6 +245,14 @@ public class Serveur extends UnicastRemoteObject implements _Serveur {
 	}
 
 	@Override
-	public _Message nouvMessage(Object texte, _Utilisateur expediteur) throws RemoteException {return new Message(expediteur, texte);}
+	public _Message nouvMessage(Object texte, _Utilisateur expediteur)
+			throws RemoteException {
+		return new Message(expediteur, texte);
+	}
+
+	@Override
+	public Set<_Utilisateur> utilisateurs() {
+		return utilisateurs;
+	}
 
 }
