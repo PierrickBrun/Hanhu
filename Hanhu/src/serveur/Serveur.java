@@ -31,7 +31,7 @@ public class Serveur extends UnicastRemoteObject implements _Serveur {
 	 * Constructeur serveur
 	 * @throws RemoteException
 	 */
-	protected Serveur() throws RemoteException {
+	public Serveur() throws RemoteException {
 		super();
 	}
 	
@@ -57,6 +57,7 @@ public class Serveur extends UnicastRemoteObject implements _Serveur {
 		diffusions.add(message);
 	}
 	
+	@SuppressWarnings("unchecked")
 	@Override
 	public Collection<_Message> getList(String name, _Utilisateur utilisateur) {
 		Class<?> c = this.getClass();
