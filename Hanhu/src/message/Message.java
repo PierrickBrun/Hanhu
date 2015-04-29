@@ -12,28 +12,30 @@ public class Message extends UnicastRemoteObject implements _Message {
 	private _Utilisateur expediteur;
 	private Object objet;
 	private Date date;
-
+	
+	/**
+	 * Constructeur du message
+	 * @param expediteur
+	 * @param objet
+	 * @throws RemoteException
+	 */
 	public Message(_Utilisateur expediteur, Object objet)
 			throws RemoteException {
 		this.expediteur = expediteur;
 		this.objet = objet;
 		this.date = new Date();
 	}
-
-	public Date date() {
-		return date;
-	}
-
-	public void setDate(Date date) {
-		this.date = date;
-	}
-
-	public _Utilisateur expediteur() {
-		return expediteur;
-	}
-
-	public Object objet() {
-		return objet;
-	}
+	
+	@Override
+	public Date date() {return date;}
+	
+	@Override
+	public void setDate(Date date) {this.date = date;}
+	
+	@Override
+	public _Utilisateur expediteur() {return expediteur;}
+	
+	@Override
+	public Object objet() {return objet;}
 
 }

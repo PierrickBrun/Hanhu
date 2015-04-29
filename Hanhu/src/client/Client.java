@@ -12,7 +12,12 @@ public class Client extends UnicastRemoteObject implements _Client {
 	private _Serveur serveur;
 
 	private static final long serialVersionUID = -8573239739135421784L;
-
+	
+	/**
+	 * Constructeur du Client
+	 * @param serveur
+	 * @throws RemoteException
+	 */
 	public Client(_Serveur serveur) throws RemoteException {
 		super();
 		this.serveur = serveur;
@@ -25,25 +30,18 @@ public class Client extends UnicastRemoteObject implements _Client {
 	}
 
 	@Override
-	public _Utilisateur connexion(String pseudo, String pass, _Client client)
-			throws RemoteException {
+	public _Utilisateur connexion(String pseudo, String pass, _Client client) throws RemoteException {
 		utilisateur = serveur.connexion(pseudo, pass, this);
 		return utilisateur;
 	}
 
 	@Override
-	public void afficher(String texte) {
-		System.out.println(texte);
-	}
+	public void afficher(String texte) {System.out.println(texte);}
 
 	@Override
-	public _Utilisateur utilisateur() {
-		return utilisateur;
-	}
+	public _Utilisateur utilisateur() {return utilisateur;}
 
 	@Override
-	public _Serveur serveur() {
-		return serveur;
-	}
+	public _Serveur serveur() {return serveur;}
 
 }
