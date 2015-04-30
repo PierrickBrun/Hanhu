@@ -1,5 +1,6 @@
 package serveur;
 
+import java.io.File;
 import java.rmi.Remote;
 import java.rmi.RemoteException;
 import java.util.Set;
@@ -7,6 +8,7 @@ import java.util.Set;
 import client._Client;
 import action.echange.*;
 import message.*;
+import stockage._StockageZone;
 import utilisateur.*;
 
 public interface _Serveur extends Remote {
@@ -51,23 +53,6 @@ public interface _Serveur extends Remote {
 			throws RemoteException;
 
 	/**
-	 * Envoi un fichier
-	 * 
-	 * @param adresse
-	 * @throws RemoteException
-	 */
-	public void uploadFile(String nom, String adresse) throws RemoteException;
-
-	/**
-	 * Reception d'un fichier
-	 * 
-	 * @param nom
-	 * @param adresse
-	 * @throws RemoteException
-	 */
-	public void downloadFile(String nom, String adresse) throws RemoteException;
-
-	/**
 	 * Renvoie l'utilisateur suivant le pseudo passe en parametre
 	 * 
 	 * @param name
@@ -96,5 +81,13 @@ public interface _Serveur extends Remote {
 	public _Discussion nouvDiscussion(_Echange echange) throws RemoteException;
 
 	public _Diffusion nouvDiffusion(_Echange echange) throws RemoteException;
+
+	public void uploadFile(File fichier, _StockageZone zone)
+			throws RemoteException;
+
+	public void downloadFile(String fichier, _StockageZone zone,
+			String reception) throws RemoteException;
+
+	public _StockageZone getZone() throws RemoteException;
 
 }

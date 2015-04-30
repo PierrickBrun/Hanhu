@@ -12,7 +12,7 @@ import utilisateur.*;
 public class Discussion extends UnicastRemoteObject implements _Discussion {
 
 	private static final long serialVersionUID = 3997108109331074580L;
-	private _Echange echange;
+	protected _Echange echange;
 
 	/**
 	 * Constructeur de la discussion

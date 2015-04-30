@@ -9,7 +9,7 @@ import message._Message;
 
 public class Synchrone implements _Synchrone {
 
-	private _Echange echange;
+	protected _Echange echange;
 
 	public Synchrone(_Echange echange) throws RemoteException {
 		this.echange = echange;

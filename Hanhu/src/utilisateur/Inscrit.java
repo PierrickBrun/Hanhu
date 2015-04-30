@@ -5,11 +5,12 @@ import java.rmi.RemoteException;
 public class Inscrit extends Utilisateur {
 
 	private static final long serialVersionUID = 4661858698250560949L;
-	private String pseudo;
-	private String pass;
-	
+	protected String pseudo;
+	protected String pass;
+
 	/**
 	 * Constructeur Inscrit
+	 * 
 	 * @param pseudo
 	 * @param pass
 	 * @throws RemoteException
@@ -20,9 +21,13 @@ public class Inscrit extends Utilisateur {
 	}
 
 	@Override
-	public boolean checkPass(String pass) {return this.pass.equals(pass);}
+	public boolean checkPass(String pass) {
+		return this.pass.equals(pass);
+	}
 
 	@Override
-	public String pseudo() {return this.pseudo;}
+	public String pseudo() {
+		return this.pseudo;
+	}
 
 }

@@ -8,8 +8,8 @@ import client._Client;
 public abstract class Utilisateur extends UnicastRemoteObject implements
 		_Utilisateur {
 
-	private _Client client;
 	private static final long serialVersionUID = -1174373080946025077L;
+	protected _Client client;
 
 	@Override
 	public _Client client() {

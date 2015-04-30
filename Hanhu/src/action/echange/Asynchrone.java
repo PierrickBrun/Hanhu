@@ -12,8 +12,8 @@ import message._Message;
 public class Asynchrone extends UnicastRemoteObject implements _Asynchrone {
 
 	private static final long serialVersionUID = -2320000314548384466L;
-	private List<_Message> reponse = new LinkedList<_Message>();
-	private _Echange echange;
+	protected List<_Message> reponse = new LinkedList<_Message>();
+	protected _Echange echange;
 
 	/**
 	 * Constructeur d'Asynchrone

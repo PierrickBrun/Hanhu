@@ -5,10 +5,11 @@ import java.rmi.RemoteException;
 public class Anonyme extends Utilisateur {
 
 	private static final long serialVersionUID = -8722552988346551253L;
-	private int id = 0;
+	protected int id = 0;
 
 	/**
 	 * Constructeur Anonyme
+	 * 
 	 * @param id
 	 * @throws RemoteException
 	 */

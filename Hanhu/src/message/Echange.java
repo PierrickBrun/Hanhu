@@ -13,8 +13,8 @@ import utilisateur._Utilisateur;
 public class Echange extends UnicastRemoteObject implements _Echange {
 
 	private static final long serialVersionUID = 3300851989932559840L;
-	private Set<_Utilisateur> utilisateurs = new HashSet<_Utilisateur>();
-	private LinkedList<_Message> messages = new LinkedList<_Message>();
+	protected Set<_Utilisateur> utilisateurs = new HashSet<_Utilisateur>();
+	protected LinkedList<_Message> messages = new LinkedList<_Message>();
 
 	public Echange(Set<_Utilisateur> users) throws RemoteException {
 		utilisateurs = users;

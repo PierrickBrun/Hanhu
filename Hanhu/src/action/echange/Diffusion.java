@@ -11,7 +11,7 @@ import utilisateur._Utilisateur;
 public class Diffusion extends UnicastRemoteObject implements _Diffusion {
 
 	private static final long serialVersionUID = 8107562705972843126L;
-	private _Echange echange;
+	protected _Echange echange;
 
 	/**
 	 * Constructeur de la Diffusion
