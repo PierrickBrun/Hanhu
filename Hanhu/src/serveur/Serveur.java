@@ -24,7 +24,7 @@ public class Serveur extends UnicastRemoteObject implements _Serveur {
 
 	protected Set<_Utilisateur> utilisateurs = new HashSet<_Utilisateur>();
 	protected Set<_Echange> echanges = new HashSet<_Echange>();
-	protected StockageZone zone = new StockageZone("zoneServeur", null, "/");
+	protected _StockageZone zone = new StockageZone("zoneServeur", null, "/");
 
 	/**
 	 * Constructeur serveur
