@@ -3,11 +3,9 @@ package serveur;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
-import java.lang.reflect.Field;
 import java.nio.channels.FileChannel;
 import java.rmi.RemoteException;
 import java.rmi.server.UnicastRemoteObject;
-import java.util.Collection;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -21,9 +19,8 @@ public class Serveur extends UnicastRemoteObject implements _Serveur {
 
 	private static final long serialVersionUID = -6046874410587068537L;
 
-	public Set<_Discussion> discussions = new HashSet<_Discussion>();
-	public Set<_Diffusion> diffusions = new HashSet<_Diffusion>();
 	private Set<_Utilisateur> utilisateurs = new HashSet<_Utilisateur>();
+	private Set<_Echange> echanges = new HashSet<_Echange>();
 
 	/**
 	 * Constructeur serveur
@@ -51,22 +48,6 @@ public class Serveur extends UnicastRemoteObject implements _Serveur {
 			}
 		}
 		return null;
-	}
-
-	@SuppressWarnings("unchecked")
-	@Override
-	public Collection<_Message> getList(String name, _Utilisateur utilisateur) {
-		Class<?> c = this.getClass();
-		Field f;
-		Collection<_Message> coll;
-		try {
-			f = c.getDeclaredField(name);
-			f.setAccessible(true);
-			coll = (Collection<_Message>) f.get(this);
-		} catch (Exception e) {
-			return null;
-		}
-		return coll;
 	}
 
 	/**
@@ -125,56 +106,16 @@ public class Serveur extends UnicastRemoteObject implements _Serveur {
 	}
 
 	@Override
-	public _Diffusion diffusion(Set<_Utilisateur> utilisateurs)
+	public _Echange echange(Set<_Utilisateur> utilisateurs)
 			throws RemoteException {
-		for (_Diffusion diffusion : diffusions) {
-			for (_Utilisateur userDiscu : diffusion.utilisateurs()) {
-				boolean contains = false;
-				for (_Utilisateur user : utilisateurs) {
-					if (user.pseudo().equals(userDiscu.pseudo())) {
-						contains = true;
-					}
-				}
-				if (contains == false) {
-					_Diffusion ajout = new Diffusion(utilisateurs);
-					this.diffusions.add(ajout);
-					return ajout;
-				}
+		for (_Echange echange : echanges) {
+			if (echange.utilisateurs().equals(utilisateurs)) {
+				return echange;
 			}
-			return diffusion;
 		}
-		_Diffusion ajout = new Diffusion(utilisateurs);
-		this.diffusions.add(ajout);
-		return ajout;
-	}
-
-	@Override
-	public _Asynchrone nouvAsynchrone() throws RemoteException {
-		return new Asynchrone(this);
-	}
-
-	@Override
-	public _Discussion discussion(Set<_Utilisateur> utilisateurs)
-			throws RemoteException {
-		for (_Discussion discussion : discussions) {
-			for (_Utilisateur userDiscu : discussion.utilisateurs()) {
-				boolean contains = false;
-				for (_Utilisateur user : utilisateurs) {
-					if (user.pseudo().equals(userDiscu.pseudo())) {
-						contains = true;
-					}
-				}
-				if (contains == false) {
-					_Discussion ajout = new Discussion(utilisateurs);
-					this.discussions.add(ajout);
-					return ajout;
-				}
-			}
-			return discussion;
-		}
-		_Discussion ajout = new Discussion(utilisateurs);
-		this.discussions.add(ajout);
-		return ajout;
+		_Echange nouvEchange = new Echange(utilisateurs);
+		echanges.add(nouvEchange);
+		return nouvEchange;
 	}
 
 	@Override
@@ -253,6 +194,26 @@ public class Serveur extends UnicastRemoteObject implements _Serveur {
 	@Override
 	public Set<_Utilisateur> utilisateurs() {
 		return utilisateurs;
+	}
+
+	@Override
+	public _Asynchrone nouvAsynchrone(_Echange echange) throws RemoteException {
+		return new Asynchrone(echange);
+	}
+
+	@Override
+	public _Synchrone nouvSynchrone(_Echange echange) throws RemoteException {
+		return new Synchrone(echange);
+	}
+
+	@Override
+	public _Discussion nouvDiscussion(_Echange echange) throws RemoteException {
+		return new Discussion(echange);
+	}
+
+	@Override
+	public _Diffusion nouvDiffusion(_Echange echange) throws RemoteException {
+		return new Diffusion(echange);
 	}
 
 }

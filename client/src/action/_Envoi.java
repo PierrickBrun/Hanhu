@@ -9,6 +9,7 @@ public interface _Envoi extends Remote {
 
 	/**
 	 * Envoie une donnee de type message
+	 * 
 	 * @param message
 	 * @throws RemoteException
 	 */

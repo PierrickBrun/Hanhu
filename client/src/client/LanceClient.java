@@ -3,13 +3,12 @@ package client;
 import java.rmi.Naming;
 import java.rmi.Remote;
 import java.rmi.RemoteException;
-import java.util.Date;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Scanner;
 import java.util.Set;
 
-import message._Message;
+import message.*;
 import action.echange.*;
 import serveur._Serveur;
 import utilisateur._Utilisateur;
@@ -23,8 +22,10 @@ public class LanceClient {
 
 	public static void main(String[] args) {
 
-		System.setProperty("java.security.policy",
-				"${workspace_loc:client}/client/src/client.policy");
+		/*
+		 * System.setProperty("java.security.policy",
+		 * "${workspace_loc:client}/client/src/client.policy");
+		 */
 
 		try {
 			Scanner sc = new Scanner(System.in);
@@ -41,18 +42,20 @@ public class LanceClient {
 				Set<_Utilisateur> utilisateurs = new HashSet<_Utilisateur>();
 				utilisateurs.add(client.utilisateur());
 				Thread.sleep(10000);
-				utilisateurs.add(serveur.getUtilisateur("guest1"));
+				utilisateurs.add(serveur.getUtilisateur("guest0"));
 				System.out.println(utilisateurs.size());
-				_Discussion discussion = serveur.discussion(utilisateurs);
+				_Echange echange = serveur.echange(utilisateurs);
+				_Discussion discussion = serveur.nouvDiscussion(echange);
 				int continuer = 1;
+
 				while (continuer == 1) {
-					Thread.sleep(2000);
 					System.out.println("Ecrire : ");
-					_Message message = serveur.nouvMessage(
-							"salut fatoumata tamaté", client.utilisateur());
+					_Message message = serveur.nouvMessage("erhkurih",
+							client.utilisateur());
 					discussion.envoyer(message);
+					Thread.sleep(2000);
 					List<_Message> lecture = (List<_Message>) discussion
-							.recevoir();
+							.recevoir(message.date());
 					for (_Message messageRecu : lecture) {
 						System.out.println("[" + messageRecu.date() + "] "
 								+ messageRecu.expediteur().pseudo() + " : "

@@ -2,14 +2,21 @@ package action;
 
 import java.rmi.Remote;
 import java.rmi.RemoteException;
+import java.util.Date;
+import java.util.List;
+
+import message._Message;
 
 public interface _Reception extends Remote {
 
 	/**
-	 * Reception d'un objet
+	 * Reception d'une liste de messages
+	 * 
 	 * @return objet
 	 * @throws RemoteException
 	 */
-	public Object recevoir() throws RemoteException;
+	public List<_Message> recevoir() throws RemoteException;
+
+	public List<_Message> recevoir(Date date) throws RemoteException;
 
 }

@@ -2,7 +2,6 @@ package serveur;
 
 import java.rmi.Remote;
 import java.rmi.RemoteException;
-import java.util.Collection;
 import java.util.Set;
 
 import client._Client;
@@ -41,16 +40,6 @@ public interface _Serveur extends Remote {
 			throws RemoteException;
 
 	/**
-	 * Renvoie une discussion déjà existante ou cree a la volee
-	 * 
-	 * @param utilisateurs
-	 * @return discussion
-	 * @throws RemoteException
-	 */
-	public _Discussion discussion(Set<_Utilisateur> utilisateurs)
-			throws RemoteException;
-
-	/**
 	 * Cree un nouveau message
 	 * 
 	 * @param objet
@@ -60,25 +49,6 @@ public interface _Serveur extends Remote {
 	 */
 	public _Message nouvMessage(Object objet, _Utilisateur expediteur)
 			throws RemoteException;
-
-	/**
-	 * Renvoie la diffusion
-	 * 
-	 * @param name
-	 * @param expediteur
-	 * @return
-	 * @throws RemoteException
-	 */
-	public Collection<_Message> getList(String name, _Utilisateur expediteur)
-			throws RemoteException;
-
-	/**
-	 * Cree une reception asynchrone
-	 * 
-	 * @return la reception
-	 * @throws RemoteException
-	 */
-	public _Asynchrone nouvAsynchrone() throws RemoteException;
 
 	/**
 	 * Envoi un fichier
@@ -114,16 +84,17 @@ public interface _Serveur extends Remote {
 	 */
 	public _Client nouvClient() throws RemoteException;
 
-	/**
-	 * Renvoie une diffusion déjà existante ou cree a la volee
-	 * 
-	 * @param utilisateurs
-	 * @return
-	 * @throws RemoteException
-	 */
-	public _Diffusion diffusion(Set<_Utilisateur> utilisateurs)
+	public Set<_Utilisateur> utilisateurs() throws RemoteException;
+
+	public _Echange echange(Set<_Utilisateur> utilisateurs)
 			throws RemoteException;
 
-	public Set<_Utilisateur> utilisateurs() throws RemoteException;
+	public _Asynchrone nouvAsynchrone(_Echange echange) throws RemoteException;
+
+	public _Synchrone nouvSynchrone(_Echange echange) throws RemoteException;
+
+	public _Discussion nouvDiscussion(_Echange echange) throws RemoteException;
+
+	public _Diffusion nouvDiffusion(_Echange echange) throws RemoteException;
 
 }
