@@ -16,6 +16,11 @@ public class Echange extends UnicastRemoteObject implements _Echange {
 	protected Set<_Utilisateur> utilisateurs = new HashSet<_Utilisateur>();
 	protected LinkedList<_Message> messages = new LinkedList<_Message>();
 
+	/**
+	 * Modifi les utilisateurs
+	 * @param users
+	 * @throws RemoteException
+	 */
 	public Echange(Set<_Utilisateur> users) throws RemoteException {
 		utilisateurs = users;
 	}

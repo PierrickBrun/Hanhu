@@ -1,10 +1,6 @@
 package serveur;
 
 import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.nio.channels.FileChannel;
 import java.rmi.RemoteException;
 import java.rmi.server.UnicastRemoteObject;
 import java.util.HashSet;
@@ -129,34 +125,11 @@ public class Serveur extends UnicastRemoteObject implements _Serveur {
 	}
 
 	@Override
-	public void downloadFile(String fichier, _StockageZone zone,
-			String reception) throws RemoteException {
+	public File downloadFile(String fichier, _StockageZone zone)
+			throws RemoteException {
 		File file = zone.fichier(fichier);
-		FileChannel fichierEntree = null;
-		FileChannel FichierSortie = null;
-		try {
-			fichierEntree = new FileInputStream(file).getChannel();
-			FichierSortie = new FileOutputStream(reception + file.getName())
-					.getChannel();
-			fichierEntree.transferTo(0, fichierEntree.size(), FichierSortie);
-			System.out.println("J'ai copié");
-		} catch (Exception e) {
-			e.printStackTrace();
-		} finally {
-			if (fichierEntree != null) {
-				try {
-					fichierEntree.close();
-				} catch (IOException e) {
-				}
-			}
-			if (FichierSortie != null) {
-				try {
-					FichierSortie.close();
-				} catch (IOException e) {
-				}
-			}
-		}
-		System.out.println("C'est finit !");
+		System.out.println("Download finit");
+		return file;
 	}
 
 	@Override

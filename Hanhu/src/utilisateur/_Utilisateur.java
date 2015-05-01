@@ -8,6 +8,19 @@ import client._Client;
 public interface _Utilisateur extends Remote {
 
 	/**
+	 * Renvoi true si l'utilisateur et connecte sinon false
+	 * @return connecte
+	 * @throws RemoteException
+	 */
+	public boolean connecte() throws RemoteException;
+	
+	/**
+	 * Modifie la valeur de connecte
+	 * @param connecte
+	 * @throws RemoteException
+	 */
+	public void setConnecte(boolean connecte) throws RemoteException;
+	/**
 	 * Verifie le mot de passe de l'utilisateur
 	 * 
 	 * @param

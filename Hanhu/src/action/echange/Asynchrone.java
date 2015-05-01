@@ -21,14 +21,10 @@ public class Asynchrone extends UnicastRemoteObject implements _Asynchrone {
 	 * @param serveur
 	 * @throws RemoteException
 	 */
-	public Asynchrone(_Echange echange) throws RemoteException {
-		this.echange = echange;
-	}
+	public Asynchrone(_Echange echange) throws RemoteException {this.echange = echange;}
 
 	@Override
-	public List<_Message> recevoir() {
-		return reponse;
-	}
+	public List<_Message> recevoir() {return reponse;}
 
 	@Override
 	public List<_Message> recevoir(Date date) throws RemoteException {

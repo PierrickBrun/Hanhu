@@ -1,7 +1,6 @@
 package stockage;
 
 import java.io.*;
-import java.nio.channels.FileChannel;
 import java.rmi.RemoteException;
 import java.rmi.server.UnicastRemoteObject;
 import java.util.HashSet;
@@ -58,32 +57,7 @@ public class StockageZone extends UnicastRemoteObject implements _StockageZone {
 	@Override
 	public void addFile(File fichier) throws RemoteException {
 		ListeFichier.add(fichier);
-		FileChannel fichierEntree = null;
-		FileChannel FichierSortie = null;
-		try {
-
-			fichierEntree = new FileInputStream(fichier).getChannel();
-			FichierSortie = new FileOutputStream(adresse + "/"
-					+ fichier.getName()).getChannel();
-			fichierEntree.transferTo(0, fichierEntree.size(), FichierSortie);
-			System.out.println("J'ai copié");
-		} catch (Exception e) {
-			e.printStackTrace();
-		} finally {
-			if (fichierEntree != null) {
-				try {
-					fichierEntree.close();
-				} catch (IOException e) {
-				}
-			}
-			if (FichierSortie != null) {
-				try {
-					FichierSortie.close();
-				} catch (IOException e) {
-				}
-			}
-		}
-		System.out.println("C'est finit !");
+		System.out.println("Upload finit !");
 	}
 
 	@Override

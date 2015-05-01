@@ -27,4 +27,14 @@ public class Anonyme extends Utilisateur {
 		return "guest" + id;
 	}
 
+	@Override
+	public boolean connecte() throws RemoteException {
+		return true;
+	}
+
+	@Override
+	public void setConnecte(boolean connecte) throws RemoteException {
+		this.connecte = connecte;
+	}
+
 }

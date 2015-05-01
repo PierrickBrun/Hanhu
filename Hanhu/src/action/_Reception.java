@@ -17,6 +17,12 @@ public interface _Reception extends Remote {
 	 */
 	public List<_Message> recevoir() throws RemoteException;
 
+	/**
+	 * Reception d'un message à partir d'une date
+	 * @param date
+	 * @return
+	 * @throws RemoteException
+	 */
 	public List<_Message> recevoir(Date date) throws RemoteException;
 
 }

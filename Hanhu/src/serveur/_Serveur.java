@@ -68,26 +68,76 @@ public interface _Serveur extends Remote {
 	 * @throws RemoteException
 	 */
 	public _Client nouvClient() throws RemoteException;
-
+	
+	/**
+	 * Renvoi la liste des utilisteurs
+	 * @return utilisateurs
+	 * @throws RemoteException
+	 */
 	public Set<_Utilisateur> utilisateurs() throws RemoteException;
 
+	/**
+	 * Renvoi l'echange entre les utilisateurs et la creer si elle n'existe pas
+	 * @param utilisateurs
+	 * @return echange
+	 * @throws RemoteException
+	 */
 	public _Echange echange(Set<_Utilisateur> utilisateurs)
 			throws RemoteException;
-
+	/**
+	 * Renvoi et cree si elle n'existe pas la reception asynchrone
+	 * @param echange
+	 * @return reception asynchrone
+	 * @throws RemoteException
+	 */
 	public _Asynchrone nouvAsynchrone(_Echange echange) throws RemoteException;
 
+	/**
+	 * Renvoi et cree si elle n'existe pas la reception synchrone
+	 * @param echange
+	 * @return reception synchrone
+	 * @throws RemoteException
+	 */
 	public _Synchrone nouvSynchrone(_Echange echange) throws RemoteException;
-
+	
+	/**
+	 * Renvoi et creer la discussion
+	 * @param echange
+	 * @return discussion
+	 * @throws RemoteException
+	 */
 	public _Discussion nouvDiscussion(_Echange echange) throws RemoteException;
 
+	/**
+	 * Renvoi et cree la diffusion
+	 * @param echange
+	 * @return
+	 * @throws RemoteException
+	 */
 	public _Diffusion nouvDiffusion(_Echange echange) throws RemoteException;
 
-	public void uploadFile(File fichier, _StockageZone zone)
-			throws RemoteException;
+	/**
+	 * Envoi un fichier dans une zone specifique du serveur
+	 * @param fichier
+	 * @param zone
+	 * @throws RemoteException
+	 */
+	public void uploadFile(File fichier, _StockageZone zone) throws RemoteException;
 
-	public void downloadFile(String fichier, _StockageZone zone,
-			String reception) throws RemoteException;
+	/**
+	 * Renvoi le fichier de la zone choisi possedant le nom spécifié
+	 * @param nomFichier
+	 * @param zone
+	 * @return fichier
+	 * @throws RemoteException
+	 */
+	public File downloadFile(String fichier, _StockageZone zone) throws RemoteException;
 
+	/**
+	 * Renvoi la zone du serveur
+	 * @return zone
+	 * @throws RemoteException
+	 */
 	public _StockageZone getZone() throws RemoteException;
 
 }

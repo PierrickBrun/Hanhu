@@ -14,7 +14,7 @@ public class Diffusion extends UnicastRemoteObject implements _Diffusion {
 	protected _Echange echange;
 
 	/**
-	 * Constructeur de la Diffusion
+	 * Constructeur de la Diffusion simple
 	 * 
 	 * @param serveur
 	 * @throws RemoteException
@@ -23,6 +23,11 @@ public class Diffusion extends UnicastRemoteObject implements _Diffusion {
 		this.echange = echange;
 	}
 
+	/**
+	 * Constructeur avec ajout des utilisateurs du serveur
+	 * @param serveur
+	 * @throws RemoteException
+	 */
 	public Diffusion(_Serveur serveur) throws RemoteException {
 		this.echange = new Echange(serveur.utilisateurs());
 	}

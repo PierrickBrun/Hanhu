@@ -11,6 +11,11 @@ public class Synchrone implements _Synchrone {
 
 	protected _Echange echange;
 
+	/**
+	 * Modifie l'echange
+	 * @param echange
+	 * @throws RemoteException
+	 */
 	public Synchrone(_Echange echange) throws RemoteException {
 		this.echange = echange;
 	}
