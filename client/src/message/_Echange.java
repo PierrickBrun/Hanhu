@@ -14,6 +14,7 @@ public interface _Echange extends Remote {
 	 * renvoie tous les messages de l'echange
 	 * 
 	 * @return list de message
+	 * @throws RemoteException
 	 */
 	public List<_Message> messages() throws RemoteException;
 
@@ -21,24 +22,27 @@ public interface _Echange extends Remote {
 	 * renvoie tous les messages de l'echange recus apres la date donnee
 	 * 
 	 * @param date
-	 * @return
+	 * @return list de message
+	 * @throws RemoteException
 	 */
 	public List<_Message> messages(Date date) throws RemoteException;
 
 	/**
-	 * renvoie la liste d'utilisateurs de l'échange	 * 
+	 * renvoie la liste d'utilisateurs de l'echange
 	 * @return liste utilisateur
+	 * @throws RemoteException
 	 */
 	public Set<_Utilisateur> utilisateurs() throws RemoteException;
 
 	/**
-	 * ajout un message à la liste
+	 * ajoute un message a la liste
 	 * @param message
+	 * @throws RemoteException
 	 */
 	public void addMessage(_Message message) throws RemoteException;
 
 	/**
-	 * Ajoutel'utilisateur
+	 * Ajoute l'utilisateur
 	 * @param utilisateur
 	 * @throws RemoteException
 	 */

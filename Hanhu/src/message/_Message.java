@@ -16,14 +16,15 @@ public interface _Message extends Remote {
 	public Date date() throws RemoteException;
 	
 	/**
-	 * Modifie la date du message
+	 * Modifie la date du message (pour que le message prenne la date de reception par le serveur et non de creation)
 	 * @param date
 	 * @throws RemoteException
 	 */
 	public void setDate(Date date) throws RemoteException;
+	
 	/**
 	 * Renvoie l'utilisateur expediteur du message
-	 * @return
+	 * @return utilisateur
 	 * @throws RemoteException
 	 */
 	public _Utilisateur expediteur() throws RemoteException;

@@ -38,11 +38,6 @@ public class Client extends UnicastRemoteObject implements _Client {
 	}
 
 	@Override
-	public void afficher(String texte) {
-		System.out.println(texte);
-	}
-
-	@Override
 	public _Utilisateur utilisateur() {
 		return utilisateur;
 	}

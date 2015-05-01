@@ -50,20 +50,6 @@ public class Serveur extends UnicastRemoteObject implements _Serveur {
 		return null;
 	}
 
-	/**
-	 * Diffusion et affichage du message à tout les utilisateurs de la liste
-	 * 
-	 * @param message
-	 * @param destinataires
-	 * @throws RemoteException
-	 */
-	public void diffuser(_Message message, Set<Utilisateur> destinataires)
-			throws RemoteException {
-		for (_Utilisateur user : destinataires) {
-			user.afficher(message.toString());
-		}
-	}
-
 	@Override
 	public Utilisateur connexion(_Client client) throws RemoteException {
 		Anonyme anonyme = new Anonyme(utilisateurs.size());

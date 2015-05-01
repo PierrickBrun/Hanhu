@@ -16,7 +16,7 @@ public class Diffusion extends UnicastRemoteObject implements _Diffusion {
 	/**
 	 * Constructeur de la Diffusion simple
 	 * 
-	 * @param serveur
+	 * @param echange
 	 * @throws RemoteException
 	 */
 	public Diffusion(_Echange echange) throws RemoteException {

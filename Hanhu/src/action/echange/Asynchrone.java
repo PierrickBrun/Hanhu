@@ -18,7 +18,7 @@ public class Asynchrone extends UnicastRemoteObject implements _Asynchrone {
 	/**
 	 * Constructeur d'Asynchrone
 	 * 
-	 * @param serveur
+	 * @param echange
 	 * @throws RemoteException
 	 */
 	public Asynchrone(_Echange echange) throws RemoteException {this.echange = echange;}

@@ -16,16 +16,20 @@ public interface _Serveur extends Remote {
 	/**
 	 * connecte un utilisateur anonymement
 	 * 
-	 * @return utilisateur cree
+	 * @param client le client qui se connecte
+	 * @return utilisateur anonyme cree
+	 * @throws RemoteException
 	 */
 	public _Utilisateur connexion(_Client client) throws RemoteException;
 
 	/**
 	 * connecte un utilisateur enregistre
 	 * 
-	 * @param pseudo
-	 * @param pass
-	 * @return
+	 * @param pseudo son pseudo
+	 * @param pass son pass
+	 * @param client le client qui se connecte
+	 * @return l'utilisateur ou null si non existant ou mauvais pass
+	 * @throws RemoteException
 	 */
 	public _Utilisateur connexion(String pseudo, String pass, _Client client)
 			throws RemoteException;
@@ -33,9 +37,9 @@ public interface _Serveur extends Remote {
 	/**
 	 * Cree un nouvel utilisateur
 	 * 
-	 * @param pseudo
-	 * @param pass
-	 * @return un utilisateur
+	 * @param pseudo son pseudo
+	 * @param pass son pass
+	 * @return un nouvel utilisateur inscrit
 	 * @throws RemoteException
 	 */
 	public _Utilisateur nouvUtilisateur(String pseudo, String pass)
@@ -44,9 +48,9 @@ public interface _Serveur extends Remote {
 	/**
 	 * Cree un nouveau message
 	 * 
-	 * @param objet
-	 * @param expediteur
-	 * @return message
+	 * @param objet ce qui est envoyé
+	 * @param expediteur l'utilisateur qui envoie le message
+	 * @return message le message créé
 	 * @throws RemoteException
 	 */
 	public _Message nouvMessage(Object objet, _Utilisateur expediteur)
@@ -55,7 +59,7 @@ public interface _Serveur extends Remote {
 	/**
 	 * Renvoie l'utilisateur suivant le pseudo passe en parametre
 	 * 
-	 * @param name
+	 * @param name le pseudo
 	 * @return utilisateur
 	 * @throws RemoteException
 	 */
@@ -70,22 +74,22 @@ public interface _Serveur extends Remote {
 	public _Client nouvClient() throws RemoteException;
 	
 	/**
-	 * Renvoi la liste des utilisteurs
+	 * Renvoie la liste des utilisteurs
 	 * @return utilisateurs
 	 * @throws RemoteException
 	 */
 	public Set<_Utilisateur> utilisateurs() throws RemoteException;
 
 	/**
-	 * Renvoi l'echange entre les utilisateurs et la creer si elle n'existe pas
-	 * @param utilisateurs
+	 * Renvoie l'echange entre les utilisateurs et le cree si il n'existe pas
+	 * @param utilisateurs la liste d'utilisateurs
 	 * @return echange
 	 * @throws RemoteException
 	 */
 	public _Echange echange(Set<_Utilisateur> utilisateurs)
 			throws RemoteException;
 	/**
-	 * Renvoi et cree si elle n'existe pas la reception asynchrone
+	 * Renvoie la reception asynchrone
 	 * @param echange
 	 * @return reception asynchrone
 	 * @throws RemoteException
@@ -93,7 +97,7 @@ public interface _Serveur extends Remote {
 	public _Asynchrone nouvAsynchrone(_Echange echange) throws RemoteException;
 
 	/**
-	 * Renvoi et cree si elle n'existe pas la reception synchrone
+	 * Renvoie la reception synchrone
 	 * @param echange
 	 * @return reception synchrone
 	 * @throws RemoteException
@@ -101,7 +105,7 @@ public interface _Serveur extends Remote {
 	public _Synchrone nouvSynchrone(_Echange echange) throws RemoteException;
 	
 	/**
-	 * Renvoi et creer la discussion
+	 * Renvoie la discussion
 	 * @param echange
 	 * @return discussion
 	 * @throws RemoteException
@@ -109,15 +113,15 @@ public interface _Serveur extends Remote {
 	public _Discussion nouvDiscussion(_Echange echange) throws RemoteException;
 
 	/**
-	 * Renvoi et cree la diffusion
+	 * Renvoie la diffusion
 	 * @param echange
-	 * @return
+	 * @return diffusion
 	 * @throws RemoteException
 	 */
 	public _Diffusion nouvDiffusion(_Echange echange) throws RemoteException;
 
 	/**
-	 * Envoi un fichier dans une zone specifique du serveur
+	 * Envoie un fichier dans une zone specifique du serveur
 	 * @param fichier
 	 * @param zone
 	 * @throws RemoteException
@@ -125,7 +129,7 @@ public interface _Serveur extends Remote {
 	public void uploadFile(File fichier, _StockageZone zone) throws RemoteException;
 
 	/**
-	 * Renvoi le fichier de la zone choisi possedant le nom spécifié
+	 * Renvoie le fichier de la zone choisie possedant le nom spécifié
 	 * @param nomFichier
 	 * @param zone
 	 * @return fichier

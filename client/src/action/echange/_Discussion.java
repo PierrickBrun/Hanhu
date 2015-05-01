@@ -4,7 +4,7 @@ import java.rmi.RemoteException;
 
 import utilisateur._Utilisateur;
 
-public interface _Discussion extends _Synchrone, _Transmission {
+public interface _Discussion extends _Synchrone, _Diffusion {
 
 	/**
 	 * Ajoute un utilisateur à la liste des utilisateurs de la discussion
