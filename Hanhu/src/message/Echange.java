@@ -15,9 +15,11 @@ public class Echange extends UnicastRemoteObject implements _Echange {
 	private static final long serialVersionUID = 3300851989932559840L;
 	protected Set<_Utilisateur> utilisateurs = new HashSet<_Utilisateur>();
 	protected LinkedList<_Message> messages = new LinkedList<_Message>();
+	protected boolean diffusion = false;
 
 	/**
-	 * Modifi les utilisateurs
+	 * Modifie les utilisateurs
+	 * 
 	 * @param users
 	 * @throws RemoteException
 	 */
@@ -26,7 +28,7 @@ public class Echange extends UnicastRemoteObject implements _Echange {
 	}
 
 	@Override
-	public List<_Message> messages() {
+	public List<_Message> messages() throws RemoteException {
 		return messages;
 	}
 
@@ -45,6 +47,32 @@ public class Echange extends UnicastRemoteObject implements _Echange {
 	public void addMessage(_Message message) throws RemoteException {
 		message.setDate(new Date());
 		messages.add(message);
+		if (this.diffusion == true) {
+			this.diffuser(message);
+		}
+	}
+
+	@Override
+	public void addMessage(_Message message, boolean diffusion)
+			throws RemoteException {
+		message.setDate(new Date());
+		messages.add(message);
+		if (diffusion == true) {
+			this.diffuser(message);
+		}
+	}
+
+	@Override
+	public void diffuser(_Message message) throws RemoteException {
+		for (_Utilisateur utilisateur : utilisateurs) {
+			utilisateur.afficher(message);
+		}
+	}
+
+	public void diffuser(String texte) throws RemoteException {
+		for (_Utilisateur utilisateur : utilisateurs) {
+			utilisateur.afficher(texte);
+		}
 	}
 
 	@Override
@@ -53,13 +81,23 @@ public class Echange extends UnicastRemoteObject implements _Echange {
 	}
 
 	@Override
-	public void addUtilisateur(_Utilisateur utilisateur) {
+	public void addUtilisateur(_Utilisateur utilisateur) throws RemoteException {
 		utilisateurs.add(utilisateur);
 	}
 
 	@Override
-	public void delUtilisateur(_Utilisateur utilisateur) {
+	public void delUtilisateur(_Utilisateur utilisateur) throws RemoteException {
 		utilisateurs.remove(utilisateur);
+	}
+
+	@Override
+	public boolean isDiffusion() throws RemoteException {
+		return diffusion;
+	}
+
+	@Override
+	public void setDiffusion(boolean diffusion) throws RemoteException {
+		this.diffusion = diffusion;
 	}
 
 }

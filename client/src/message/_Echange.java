@@ -29,13 +29,16 @@ public interface _Echange extends Remote {
 
 	/**
 	 * renvoie la liste d'utilisateurs de l'echange
+	 * 
 	 * @return liste utilisateur
 	 * @throws RemoteException
 	 */
 	public Set<_Utilisateur> utilisateurs() throws RemoteException;
 
 	/**
-	 * ajoute un message a la liste
+	 * ajoute un message a la liste et le diffuse si l'échange st en mode
+	 * diffusion
+	 * 
 	 * @param message
 	 * @throws RemoteException
 	 */
@@ -43,6 +46,7 @@ public interface _Echange extends Remote {
 
 	/**
 	 * Ajoute l'utilisateur
+	 * 
 	 * @param utilisateur
 	 * @throws RemoteException
 	 */
@@ -50,9 +54,43 @@ public interface _Echange extends Remote {
 
 	/**
 	 * Supprime l'utilisateur
+	 * 
 	 * @param utilisateur
 	 * @throws RemoteException
 	 */
 	public void delUtilisateur(_Utilisateur utilisateur) throws RemoteException;
+
+	/**
+	 * ajoute un message et le diffuse si diffusion est vrai
+	 * 
+	 * @param message
+	 * @param diffusion
+	 * @throws RemoteException
+	 */
+	public void addMessage(_Message message, boolean diffusion)
+			throws RemoteException;
+
+	/**
+	 * affiche le message à tous les utilisateurs
+	 * 
+	 * @param message
+	 * @throws RemoteException
+	 */
+	public void diffuser(_Message message) throws RemoteException;
+
+	/**
+	 * 
+	 * @return diffusion
+	 * @throws RemoteException
+	 */
+	public boolean isDiffusion() throws RemoteException;
+
+	/**
+	 * change le mode de diffusion
+	 * 
+	 * @param diffusion
+	 * @throws RemoteException
+	 */
+	public void setDiffusion(boolean diffusion) throws RemoteException;
 
 }

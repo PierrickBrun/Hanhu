@@ -16,7 +16,8 @@ public interface _Serveur extends Remote {
 	/**
 	 * connecte un utilisateur anonymement
 	 * 
-	 * @param client le client qui se connecte
+	 * @param client
+	 *            le client qui se connecte
 	 * @return utilisateur anonyme cree
 	 * @throws RemoteException
 	 */
@@ -25,9 +26,12 @@ public interface _Serveur extends Remote {
 	/**
 	 * connecte un utilisateur enregistre
 	 * 
-	 * @param pseudo son pseudo
-	 * @param pass son pass
-	 * @param client le client qui se connecte
+	 * @param pseudo
+	 *            son pseudo
+	 * @param pass
+	 *            son pass
+	 * @param client
+	 *            le client qui se connecte
 	 * @return l'utilisateur ou null si non existant ou mauvais pass
 	 * @throws RemoteException
 	 */
@@ -37,8 +41,10 @@ public interface _Serveur extends Remote {
 	/**
 	 * Cree un nouvel utilisateur
 	 * 
-	 * @param pseudo son pseudo
-	 * @param pass son pass
+	 * @param pseudo
+	 *            son pseudo
+	 * @param pass
+	 *            son pass
 	 * @return un nouvel utilisateur inscrit
 	 * @throws RemoteException
 	 */
@@ -48,8 +54,10 @@ public interface _Serveur extends Remote {
 	/**
 	 * Cree un nouveau message
 	 * 
-	 * @param objet ce qui est envoyé
-	 * @param expediteur l'utilisateur qui envoie le message
+	 * @param objet
+	 *            ce qui est envoyé
+	 * @param expediteur
+	 *            l'utilisateur qui envoie le message
 	 * @return message le message créé
 	 * @throws RemoteException
 	 */
@@ -59,22 +67,16 @@ public interface _Serveur extends Remote {
 	/**
 	 * Renvoie l'utilisateur suivant le pseudo passe en parametre
 	 * 
-	 * @param name le pseudo
+	 * @param name
+	 *            le pseudo
 	 * @return utilisateur
 	 * @throws RemoteException
 	 */
 	public _Utilisateur getUtilisateur(String name) throws RemoteException;
 
 	/**
-	 * Cree un nouveau Client
-	 * 
-	 * @return client
-	 * @throws RemoteException
-	 */
-	public _Client nouvClient() throws RemoteException;
-	
-	/**
 	 * Renvoie la liste des utilisteurs
+	 * 
 	 * @return utilisateurs
 	 * @throws RemoteException
 	 */
@@ -82,14 +84,18 @@ public interface _Serveur extends Remote {
 
 	/**
 	 * Renvoie l'echange entre les utilisateurs et le cree si il n'existe pas
-	 * @param utilisateurs la liste d'utilisateurs
+	 * 
+	 * @param utilisateurs
+	 *            la liste d'utilisateurs
 	 * @return echange
 	 * @throws RemoteException
 	 */
 	public _Echange echange(Set<_Utilisateur> utilisateurs)
 			throws RemoteException;
+
 	/**
 	 * Renvoie la reception asynchrone
+	 * 
 	 * @param echange
 	 * @return reception asynchrone
 	 * @throws RemoteException
@@ -98,14 +104,16 @@ public interface _Serveur extends Remote {
 
 	/**
 	 * Renvoie la reception synchrone
+	 * 
 	 * @param echange
 	 * @return reception synchrone
 	 * @throws RemoteException
 	 */
 	public _Synchrone nouvSynchrone(_Echange echange) throws RemoteException;
-	
+
 	/**
 	 * Renvoie la discussion
+	 * 
 	 * @param echange
 	 * @return discussion
 	 * @throws RemoteException
@@ -114,6 +122,7 @@ public interface _Serveur extends Remote {
 
 	/**
 	 * Renvoie la diffusion
+	 * 
 	 * @param echange
 	 * @return diffusion
 	 * @throws RemoteException
@@ -122,23 +131,29 @@ public interface _Serveur extends Remote {
 
 	/**
 	 * Envoie un fichier dans une zone specifique du serveur
+	 * 
 	 * @param fichier
 	 * @param zone
 	 * @throws RemoteException
 	 */
-	public void uploadFile(File fichier, _StockageZone zone) throws RemoteException;
+	public void uploadFile(File fichier, _StockageZone zone)
+			throws RemoteException;
 
 	/**
 	 * Renvoie le fichier de la zone choisie possedant le nom spécifié
-	 * @param fichier nom du fichier
+	 * 
+	 * @param fichier
+	 *            nom du fichier
 	 * @param zone
 	 * @return fichier
 	 * @throws RemoteException
 	 */
-	public File downloadFile(String fichier, _StockageZone zone) throws RemoteException;
+	public File downloadFile(String fichier, _StockageZone zone)
+			throws RemoteException;
 
 	/**
 	 * Renvoi la zone du serveur
+	 * 
 	 * @return zone
 	 * @throws RemoteException
 	 */

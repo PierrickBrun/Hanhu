@@ -4,7 +4,6 @@ import java.rmi.Naming;
 import java.rmi.Remote;
 import java.rmi.RemoteException;
 import java.util.HashSet;
-import java.util.List;
 import java.util.Scanner;
 import java.util.Set;
 
@@ -21,12 +20,6 @@ public class LanceClient {
 	}
 
 	public static void main(String[] args) {
-
-		/*
-		 * System.setProperty("java.security.policy",
-		 * "${workspace_loc:client}/client/src/client.policy");
-		 */
-
 		try {
 			Scanner sc = new Scanner(System.in);
 			System.out.println("Veuillez entrer l'url du serveur :");
@@ -35,7 +28,7 @@ public class LanceClient {
 			Remote remote = Naming.lookup("rmi://" + url + "/serveur");
 			if (remote instanceof _Serveur) {
 				_Serveur serveur = (_Serveur) remote;
-				_Client client = serveur.nouvClient();
+				_Client client = new Client(serveur);
 				client.connexion();
 				System.out.println(client.utilisateur().pseudo());
 
@@ -45,22 +38,24 @@ public class LanceClient {
 				utilisateurs.add(serveur.getUtilisateur("guest0"));
 				System.out.println(utilisateurs.size());
 				_Echange echange = serveur.echange(utilisateurs);
+				echange.setDiffusion(true);
 				_Discussion discussion = serveur.nouvDiscussion(echange);
 				int continuer = 1;
 
 				while (continuer == 1) {
-					System.out.println("Ecrire : ");
-					_Message message = serveur.nouvMessage("erhkurih",
+					_Message message = serveur.nouvMessage("mdr",
 							client.utilisateur());
 					discussion.envoyer(message);
 					Thread.sleep(2000);
-					List<_Message> lecture = (List<_Message>) discussion
-							.recevoir(message.date());
-					for (_Message messageRecu : lecture) {
-						System.out.println("[" + messageRecu.date() + "] "
-								+ messageRecu.expediteur().pseudo() + " : "
-								+ messageRecu.objet());
-					}
+					/**
+					 * List<_Message> lecture = (List<_Message>) discussion
+					 * .recevoir(message.date());
+					 * 
+					 * for (_Message messageRecu : lecture) {
+					 * System.out.println("[" + messageRecu.date() + "] " +
+					 * messageRecu.expediteur().pseudo() + " : " +
+					 * messageRecu.objet()); }
+					 */
 				}
 			}
 		} catch (Exception e) {

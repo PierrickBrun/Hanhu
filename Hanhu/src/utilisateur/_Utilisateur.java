@@ -3,6 +3,7 @@ package utilisateur;
 import java.rmi.Remote;
 import java.rmi.RemoteException;
 
+import message._Message;
 import client._Client;
 
 public interface _Utilisateur extends Remote {
@@ -14,14 +15,6 @@ public interface _Utilisateur extends Remote {
 	 * @throws RemoteException
 	 */
 	public boolean connecte() throws RemoteException;
-
-	/**
-	 * Modifie la valeur de connecte
-	 * 
-	 * @param connecte
-	 * @throws RemoteException
-	 */
-	public void setConnecte(boolean connecte) throws RemoteException;
 
 	/**
 	 * Verifie le mot de passe de l'utilisateur
@@ -56,5 +49,9 @@ public interface _Utilisateur extends Remote {
 	 * @throws RemoteException
 	 */
 	public _Client client() throws RemoteException;
+
+	public void afficher(String texte) throws RemoteException;
+
+	public void afficher(_Message message) throws RemoteException;
 
 }

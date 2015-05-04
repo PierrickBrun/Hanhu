@@ -6,7 +6,6 @@ import java.rmi.server.UnicastRemoteObject;
 import java.util.HashSet;
 import java.util.Set;
 
-import client.Client;
 import client._Client;
 import action.echange.*;
 import message.*;
@@ -83,12 +82,6 @@ public class Serveur extends UnicastRemoteObject implements _Serveur {
 		Inscrit inscrit = new Inscrit(pseudo, pass);
 		addUser(inscrit);
 		return inscrit;
-	}
-
-	@Override
-	public _Client nouvClient() throws RemoteException {
-		_Client client = new Client(this);
-		return client;
 	}
 
 	@Override

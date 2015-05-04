@@ -3,6 +3,7 @@ package utilisateur;
 import java.rmi.RemoteException;
 import java.rmi.server.UnicastRemoteObject;
 
+import message._Message;
 import client._Client;
 
 public abstract class Utilisateur extends UnicastRemoteObject implements
@@ -10,7 +11,6 @@ public abstract class Utilisateur extends UnicastRemoteObject implements
 
 	private static final long serialVersionUID = -1174373080946025077L;
 	protected _Client client;
-	protected boolean connecte;
 
 	@Override
 	public _Client client() {
@@ -39,6 +39,21 @@ public abstract class Utilisateur extends UnicastRemoteObject implements
 
 	public boolean equals(Utilisateur utilisateur) throws RemoteException {
 		return utilisateur.pseudo().equals(this.pseudo());
+	}
+
+	@Override
+	public boolean connecte() throws RemoteException {
+		return this.client != null;
+	}
+
+	@Override
+	public void afficher(_Message message) throws RemoteException {
+		this.client.afficher(message);
+	}
+
+	@Override
+	public void afficher(String texte) throws RemoteException {
+		this.client.afficher(texte);
 	}
 
 }
