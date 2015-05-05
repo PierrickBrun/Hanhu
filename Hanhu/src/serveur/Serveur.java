@@ -35,7 +35,7 @@ public class Serveur extends UnicastRemoteObject implements _Serveur {
 	 * 
 	 * @param utilisateur
 	 */
-	private void addUser(Utilisateur utilisateur) {
+	protected void addUser(Utilisateur utilisateur) {
 		utilisateurs.add(utilisateur);
 	}
 
