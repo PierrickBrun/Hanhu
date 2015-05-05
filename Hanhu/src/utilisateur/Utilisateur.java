@@ -10,7 +10,7 @@ public abstract class Utilisateur extends UnicastRemoteObject implements
 		_Utilisateur {
 
 	private static final long serialVersionUID = -1174373080946025077L;
-	protected _Client client;
+	protected _Client client = null;
 
 	@Override
 	public _Client client() {
