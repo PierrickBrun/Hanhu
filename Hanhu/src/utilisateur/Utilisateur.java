@@ -53,7 +53,8 @@ public abstract class Utilisateur extends UnicastRemoteObject implements
 
 	@Override
 	public void afficher(String texte) throws RemoteException {
-		this.client.afficher(texte);
+		if (this.client != null)
+			this.client.afficher(texte);
 	}
 
 }
